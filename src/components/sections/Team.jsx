@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Mail, Award, GraduationCap, Globe, Users, ArrowRight } from 'lucide-react';
+import { Linkedin, Mail, Award, GraduationCap, Globe, Users, ArrowRight, User } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 
 const partners = [
@@ -11,7 +11,8 @@ const partners = [
     experience: '25+ tahun pengalaman, formerly partner at Big 4 law firm',
     notable: 'Lead counsel untuk merger bank senilai Rp 50 Triliun',
     languages: ['Indonesia', 'English', 'Mandarin'],
-    image: 'HS',
+    initials: 'HS',
+    gender: 'male',
   },
   {
     name: 'Dr. Amanda Wijaya, S.H., M.H.',
@@ -21,7 +22,8 @@ const partners = [
     experience: '20+ tahun, 200+ cases di Pengadilan Niaga',
     notable: 'Won landmark case yang menjadi yurisprudensi di MA',
     languages: ['Indonesia', 'English'],
-    image: 'AW',
+    initials: 'AW',
+    gender: 'female',
   },
   {
     name: 'Reza Prasetya, S.H., LL.M.',
@@ -31,7 +33,8 @@ const partners = [
     experience: '15+ tahun, formerly in-house at tech unicorn',
     notable: 'Legal advisor untuk 50+ startup yang sudah dapat funding',
     languages: ['Indonesia', 'English'],
-    image: 'RP',
+    initials: 'RP',
+    gender: 'male',
   },
   {
     name: 'Siti Nurhaliza, S.H., M.Kn.',
@@ -41,7 +44,8 @@ const partners = [
     experience: '18+ tahun, expert witness di PHI',
     notable: 'Author buku Hukum Ketenagakerjaan best-seller',
     languages: ['Indonesia', 'English', 'Dutch'],
-    image: 'SN',
+    initials: 'SN',
+    gender: 'female',
   },
 ];
 
@@ -51,6 +55,40 @@ const teamStats = [
   { value: '15', label: 'Junior Associates' },
   { value: '5+', label: 'Jurisdictions' },
 ];
+
+// Professional avatar placeholder component
+function AvatarPlaceholder({ initials, gender }) {
+  return (
+    <div className="w-full h-full bg-gradient-to-br from-navy-700 via-navy-800 to-navy-900 flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      {/* Person silhouette */}
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-navy-600/50 flex items-center justify-center mb-2 border-2 border-gold-600/30">
+          <User className="w-10 h-10 sm:w-12 sm:h-12 text-white/60" />
+        </div>
+        <div className="text-2xl sm:text-3xl font-heading font-bold text-gold-500/80">
+          {initials}
+        </div>
+      </div>
+
+      {/* Decorative corner */}
+      <div className="absolute bottom-0 right-0 w-16 h-16 overflow-hidden">
+        <div className="absolute bottom-0 right-0 w-24 h-24 bg-gold-600/20 transform rotate-45 translate-x-12 translate-y-12" />
+      </div>
+    </div>
+  );
+}
 
 export default function Team() {
   return (
@@ -84,10 +122,8 @@ export default function Team() {
             >
               <div className="flex flex-col sm:flex-row">
                 {/* Photo placeholder */}
-                <div className="sm:w-48 h-48 sm:h-auto bg-gradient-to-br from-navy-800 to-navy-900 flex items-center justify-center flex-shrink-0">
-                  <div className="text-4xl font-heading font-bold text-white/30">
-                    {partner.image}
-                  </div>
+                <div className="sm:w-48 h-48 sm:h-auto flex-shrink-0">
+                  <AvatarPlaceholder initials={partner.initials} gender={partner.gender} />
                 </div>
 
                 {/* Info */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Video, Building2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Video, Building2, MessageCircle, Navigation } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 
 const contactInfo = [
@@ -16,7 +16,7 @@ const contactInfo = [
     link: 'mailto:consult@justitiapartners.co.id',
   },
   {
-    icon: Phone,
+    icon: MessageCircle,
     label: 'WhatsApp',
     value: '0812-JUSTITIA',
     link: 'https://wa.me/62812JUSTITIA',
@@ -31,6 +31,49 @@ const categories = [
   'Startup & Tech',
   'Lainnya',
 ];
+
+// Map placeholder component with visual representation
+function MapPlaceholder() {
+  return (
+    <div className="h-48 bg-gradient-to-br from-navy-100 to-navy-200 rounded-xl relative overflow-hidden">
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-30">
+        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <pattern id="map-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#1E3A5F" strokeWidth="0.3"/>
+            </pattern>
+          </defs>
+          <rect width="100" height="100" fill="url(#map-grid)" />
+        </svg>
+      </div>
+
+      {/* Roads simulation */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/3 left-0 right-0 h-1 bg-white/40" />
+        <div className="absolute top-2/3 left-0 right-0 h-0.5 bg-white/30" />
+        <div className="absolute left-1/4 top-0 bottom-0 w-0.5 bg-white/30" />
+        <div className="absolute left-2/3 top-0 bottom-0 w-1 bg-white/40" />
+      </div>
+
+      {/* Location marker */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full">
+        <div className="relative">
+          <div className="w-8 h-8 bg-gold-600 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+            <MapPin className="w-5 h-5 text-white" />
+          </div>
+          <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-3 h-3 bg-gold-600 rotate-45" />
+        </div>
+      </div>
+
+      {/* Office label */}
+      <div className="absolute bottom-3 left-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 flex items-center gap-2">
+        <Navigation className="w-4 h-4 text-navy-900" />
+        <span className="text-sm font-medium text-navy-900">Plaza Kuningan, Jakarta</span>
+      </div>
+    </div>
+  );
+}
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -207,7 +250,7 @@ export default function Contact() {
                       Metode Konsultasi yang Diinginkan *
                     </label>
                     <div className="flex flex-wrap gap-4">
-                      <label className="flex items-center gap-3 cursor-pointer">
+                      <label className="flex items-center gap-3 cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-3 rounded-xl transition-colors">
                         <input
                           type="radio"
                           name="method"
@@ -216,10 +259,10 @@ export default function Contact() {
                           onChange={handleChange}
                           className="w-4 h-4 text-navy-900 focus:ring-navy-900"
                         />
-                        <Video className="w-5 h-5 text-gray-500" />
-                        <span className="text-gray-700">Online Video Call</span>
+                        <Video className="w-5 h-5 text-navy-900" />
+                        <span className="text-gray-700 font-medium">Online Video Call</span>
                       </label>
-                      <label className="flex items-center gap-3 cursor-pointer">
+                      <label className="flex items-center gap-3 cursor-pointer bg-gray-50 hover:bg-gray-100 px-4 py-3 rounded-xl transition-colors">
                         <input
                           type="radio"
                           name="method"
@@ -228,8 +271,8 @@ export default function Contact() {
                           onChange={handleChange}
                           className="w-4 h-4 text-navy-900 focus:ring-navy-900"
                         />
-                        <Building2 className="w-5 h-5 text-gray-500" />
-                        <span className="text-gray-700">Tatap Muka di Kantor</span>
+                        <Building2 className="w-5 h-5 text-navy-900" />
+                        <span className="text-gray-700 font-medium">Tatap Muka di Kantor</span>
                       </label>
                     </div>
                   </div>
@@ -294,9 +337,7 @@ export default function Contact() {
               </div>
 
               {/* Map placeholder */}
-              <div className="h-48 bg-gray-200 rounded-xl flex items-center justify-center">
-                <span className="text-gray-500 text-sm">Google Maps</span>
-              </div>
+              <MapPlaceholder />
             </div>
 
             {/* Office hours */}

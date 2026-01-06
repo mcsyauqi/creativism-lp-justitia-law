@@ -1,5 +1,5 @@
 import React from 'react';
-import { Landmark, Cpu, Factory, ShoppingBag, Building2, Heart, Zap, Pickaxe, CheckCircle, Shield } from 'lucide-react';
+import { Landmark, Cpu, Factory, ShoppingBag, Building2, Heart, Zap, Pickaxe, CheckCircle, Shield, Briefcase } from 'lucide-react';
 import SectionHeader from '../ui/SectionHeader';
 
 const cases = [
@@ -48,6 +48,18 @@ const industries = [
   { icon: Pickaxe, name: 'Mining' },
 ];
 
+// Client logo placeholders (anonymous)
+const clientLogos = [
+  { abbr: 'BNI', type: 'Bank' },
+  { abbr: 'TKP', type: 'E-commerce' },
+  { abbr: 'GJK', type: 'Fintech' },
+  { abbr: 'MNC', type: 'Media' },
+  { abbr: 'AST', type: 'Manufacture' },
+  { abbr: 'PLN', type: 'Energy' },
+  { abbr: 'SML', type: 'Retail' },
+  { abbr: 'TLK', type: 'Telco' },
+];
+
 const colorClasses = {
   navy: {
     bg: 'bg-navy-900',
@@ -65,6 +77,18 @@ const colorClasses = {
     text: 'text-forest-600',
   },
 };
+
+// Client logo placeholder component
+function ClientLogoPlaceholder({ abbr, type }) {
+  return (
+    <div className="bg-gray-50 hover:bg-gray-100 rounded-xl p-4 flex flex-col items-center justify-center transition-colors duration-200 border border-gray-200 hover:border-gray-300">
+      <div className="w-12 h-12 bg-navy-900/10 rounded-lg flex items-center justify-center mb-2">
+        <span className="text-lg font-bold text-navy-900/60">{abbr}</span>
+      </div>
+      <span className="text-xs text-gray-500">{type}</span>
+    </div>
+  );
+}
 
 export default function NotableCases() {
   return (
@@ -111,6 +135,24 @@ export default function NotableCases() {
           ))}
         </div>
 
+        {/* Client logos */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg mb-12">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Briefcase className="w-6 h-6 text-navy-900" />
+            <h3 className="text-xl font-bold text-navy-900 font-heading">
+              Dipercaya oleh Perusahaan Terkemuka
+            </h3>
+          </div>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+            {clientLogos.map((logo, index) => (
+              <ClientLogoPlaceholder key={index} abbr={logo.abbr} type={logo.type} />
+            ))}
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-6">
+            *Logo ditampilkan dengan izin. Beberapa klien memilih untuk tetap confidential.
+          </p>
+        </div>
+
         {/* Industries served */}
         <div className="bg-white rounded-2xl p-8 shadow-lg mb-12">
           <h3 className="text-xl font-bold text-navy-900 mb-6 text-center font-heading">
@@ -120,10 +162,10 @@ export default function NotableCases() {
             {industries.map((industry, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 bg-navy-900/5 hover:bg-navy-900 hover:text-white rounded-full px-5 py-2.5 transition-colors duration-200 group"
+                className="flex items-center gap-2 bg-navy-900/5 hover:bg-navy-900 hover:text-white rounded-full px-5 py-2.5 transition-colors duration-200 group cursor-pointer"
               >
-                <industry.icon className="w-4 h-4 text-navy-900 group-hover:text-white" />
-                <span className="text-sm font-medium text-navy-900 group-hover:text-white">
+                <industry.icon className="w-4 h-4 text-navy-900 group-hover:text-white transition-colors" />
+                <span className="text-sm font-medium text-navy-900 group-hover:text-white transition-colors">
                   {industry.name}
                 </span>
               </div>
